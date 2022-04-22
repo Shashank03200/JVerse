@@ -17,12 +17,7 @@ app.use(
   )
 );
 
-app.use(
-  cors({
-    credentials: true,
-    origin: "*",
-  })
-);
+app.use(cors());
 
 app.use(morgan("dev"));
 
