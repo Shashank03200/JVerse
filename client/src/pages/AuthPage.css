@@ -1,0 +1,87 @@
+.Auth__Wrapper {
+  display: flex;
+  align-items: center !important;
+  height: 100vh;
+  
+}
+
+
+.Auth__LeftContainer {
+  flex: 7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Auth__RightContainer {
+  flex: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Auth__FormWrapper {
+  height: auto;
+  border-radius: 4px;
+  border: 1px solid rgb(201, 196, 196);
+  padding: 20px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  align-items: center;
+}
+
+.Auth__FormWrapper__JVerseLogo {
+  height: 80px;
+  margin: 20px auto;
+}
+
+.Auth__FormWrapper__Form {
+  margin: 60px auto;
+  width: 80%;
+}
+
+.Auth__FormWrapper__SubmitButton {
+  margin-top: 20px;
+  width: 100% !important;
+  font-weight: 400 !important;
+  padding: 1.2rem;
+  background-color: #6c63ff !important;
+  font-size: 18px !important;
+}
+
+.Auth__FormWrapper__DescContainer {
+  text-align: center ;
+  font-size: 16px;
+}
+
+.Auth__FormWrapper__DescContainer a {
+  color: blue;
+}
+
+
+@media screen and (max-width: 450px) {
+  .Auth__FormWrapper {
+    display: flex;
+    flex-direction: column;
+   
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    align-items: center;
+    padding: 1rem;
+    width: 90%;
+    background-color: #ffffff;
+  }
+
+  .Auth__Wrapper {
+    background-image: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
+  }
+
+ 
+  .Auth__FormWrapper__Form{
+    width: 85%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .Auth__LeftContainer {
+    display: none;
+  }
+}
