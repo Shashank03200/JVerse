@@ -30,7 +30,7 @@ const RegisterPage = () => {
     try {
       const requestObject = {
         method: "POST",
-        url: process.env.REACT_APP_API_URL + "/api/auth/register",
+        url: "https://j-verse.herokuapp.com/api/auth/register",
         data: registerData,
       };
       dispatch(signUser(requestObject));
