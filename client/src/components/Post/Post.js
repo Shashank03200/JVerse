@@ -24,7 +24,7 @@ const Post = ({ postData }) => {
   const [likesCount, setLikesCount] = useState(postData.likes.length);
   const [commentsVisibility, setCommentsVisibility] = useState(false);
   const [latestComments, setLatestComments] = useState(undefined);
-  const userId = useSelector((state) => state.feed.userId);
+  const userId = useSelector((state) => state.user.userId);
 
   const { _id: postId, postDeletePossible } = postData;
   const { username, profileImage: userProfileSrc } = postData.userId;

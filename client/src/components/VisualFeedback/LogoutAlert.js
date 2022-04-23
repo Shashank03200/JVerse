@@ -9,12 +9,13 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
-import { feedSliceActions } from "../../store/feedSlice";
+
 import { authSliceActions } from "../../store/authSlice";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signOutUser } from "../../store/auth-actions";
 import { removeTokens } from "../../utils/handleTokens";
+import { userSliceActions } from "../../store/userSlice";
 
 function LogoutAlert(props) {
   const { isOpen, onClose } = props;
@@ -24,7 +25,7 @@ function LogoutAlert(props) {
   const userLogoutHandler = () => {
     dispatch(signOutUser()).then(() => {
       removeTokens();
-      dispatch(feedSliceActions.resetUserData());
+      dispatch(userSliceActions.resetUserData());
       dispatch(authSliceActions.logoutUser());
       props.onClose();
       history.replace("/login");

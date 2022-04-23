@@ -6,10 +6,10 @@ import { useSelector } from "react-redux";
 import routeInstance from "../../routes.instance";
 
 function CommentInput(props) {
-  const userProfileImage = useSelector((state) => state.feed.userProfileImage);
-  const userFullname = useSelector((state) => state.feed.userFullname);
+  const userProfileImage = useSelector((state) => state.user.userProfileImage);
+  const userFullname = useSelector((state) => state.user.userFullname);
 
-  const { userName: username } = useSelector((state) => state.feed);
+  const { userName: username } = useSelector((state) => state.user);
 
   const [text, setText] = useState("");
   let isDisabled = true;

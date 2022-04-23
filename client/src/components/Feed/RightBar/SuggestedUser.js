@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Box, Button } from "@chakra-ui/react";
 import { Avatar } from "@chakra-ui/avatar";
 import { useDispatch } from "react-redux";
-import { followUser } from "../../../store/feed-actions";
+import { followUser } from "../../../store/user-actions";
 import { Link } from "react-router-dom";
 
 const SuggestedUser = (props) => {

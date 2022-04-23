@@ -19,7 +19,7 @@ const LoginPage = () => {
     e.preventDefault();
     const requestObject = {
       method: "POST",
-      url: "https://https://j-verse.herokuapp.com/api/auth/login",
+      url: process.env.REACT_APP_API_URL + "/api/auth/login",
       data: { email, password },
     };
     dispatch(signUser(requestObject));

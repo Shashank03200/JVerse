@@ -4,7 +4,7 @@ import "./ProfilePage.css";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useEffect } from "react";
-import { fetchProfileData } from "../store/feed-actions";
+import { fetchProfileData } from "../store/user-actions";
 import { UISliceActions } from "../store/UISlice";
 
 import { useState } from "react";

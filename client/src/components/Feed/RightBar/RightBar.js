@@ -10,7 +10,7 @@ import "./RightBar.css";
 
 const RightBar = () => {
   const dispatch = useDispatch();
-  const userData = useSelector((state) => state.feed);
+  const userData = useSelector((state) => state.user);
   const togglePostCreatorModalVisibility = () => {
     dispatch(UISliceActions.toggleModalVisibility());
   };

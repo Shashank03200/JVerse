@@ -16,7 +16,7 @@ import { MdFileUpload } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import useUploadImage from "../../hooks/useUploadImage";
-import { loadUserDataUsingToken, updateUser } from "../../store/feed-actions";
+import { loadUserDataUsingToken, updateUser } from "../../store/user-actions";
 import { UISliceActions } from "../../store/UISlice";
 import setToastData from "../../utils/showToast";
 
@@ -27,13 +27,13 @@ function BasicInfoForm() {
   const { imageError, imageChangeHandler, imageSrc, setImageSrc } =
     useUploadImage();
 
-  const username = useSelector((state) => state.feed.userName);
+  const username = useSelector((state) => state.user.userName);
 
   const {
     userProfileImage,
     userFullName,
     bio: retBio,
-  } = useSelector((state) => state.feed);
+  } = useSelector((state) => state.user);
 
   const [fName, setFName] = useState("");
   const [lName, setLName] = useState("");

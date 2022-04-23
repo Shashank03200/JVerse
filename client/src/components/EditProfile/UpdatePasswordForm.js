@@ -9,7 +9,7 @@ import {
   Input,
   VStack,
 } from "@chakra-ui/react";
-import { updateUserPassword } from "../../store/auth-actions";
+import { updateUserPassword } from "../../store/user-actions";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -19,7 +19,7 @@ const UpdatePasswordForm = () => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const userId = useSelector((state) => state.feed.userId);
+  const userId = useSelector((state) => state.user.userId);
   const dispatch = useDispatch();
 
   const passwordUpdateHandler = () => {

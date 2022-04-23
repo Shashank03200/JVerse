@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { loadSuggestedUsers } from "../store/feed-actions";
+import { loadSuggestedUsers } from "../store/user-actions";
 
 const useSetSuggestedUsers = () => {
   const [suggestedUsers, setSuggestedUsers] = useState(undefined);

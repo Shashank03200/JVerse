@@ -6,7 +6,7 @@ import { UISliceActions } from "../../../store/UISlice";
 const UserDetailsCard = ({ userData }) => {
   const dispatch = useDispatch();
 
-  const userProfileImage = useSelector((state) => state.feed.userProfileImage);
+  const userProfileImage = useSelector((state) => state.user.userProfileImage);
 
   if (!userData) {
     return <p>Loading</p>;

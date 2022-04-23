@@ -16,7 +16,7 @@ const Navbar = () => {
 
   const isModalOpen = useSelector((state) => state.UISlice.isModalOpen);
   const { userFullname, userProfileImage, userName } = useSelector(
-    (state) => state.feed
+    (state) => state.user
   );
 
   const [activeIcon, setActiveIcon] = useState({

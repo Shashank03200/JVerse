@@ -1,5 +1,6 @@
 import routeInstance from "../routes.instance";
-import { feedSliceActions } from "../store/feedSlice";
+
+import { userSliceActions } from "../store/userSlice";
 
 const checkSession = (dispatch) => {
   return new Promise(async (resolve, reject) => {
@@ -12,7 +13,7 @@ const checkSession = (dispatch) => {
       if (response.status === 200) {
         console.log(response);
         const resData = await response.data;
-        dispatch(feedSliceActions.setUserData({ ...resData.data }));
+        dispatch(userSliceActions.setUserData({ ...resData.data }));
         resolve(resData);
       }
     } catch (error) {

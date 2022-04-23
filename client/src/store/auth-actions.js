@@ -6,7 +6,8 @@ import { getTokens, setToken } from "../utils/handleTokens";
 import checkSession from "../utils/checkSession";
 import routeInstance from "../routes.instance";
 import setProcess from "../utils/setProcess";
-import { feedSliceActions } from "./feedSlice";
+
+import { userSliceActions } from "./userSlice";
 
 export const signUser = (requestObject) => {
   return async (dispatch) => {
@@ -41,7 +42,7 @@ export const signOutUser = () => {
       });
       console.log("response", response);
       dispatch(
-        feedSliceActions.setUserData({
+        userSliceActions.setUserData({
           userId: null,
           userProfileImage: null,
           userName: null,
@@ -53,59 +54,6 @@ export const signOutUser = () => {
     } catch (err) {
       setProcess.setResultProcess(dispatch, false, "Action Unauthorized");
       setToastData(dispatch);
-    }
-  };
-};
-
-export const deleteUserAccount = (currentPassword, userId) => {
-  return async (dispatch) => {
-    try {
-      setProcess.setLoadingProcess(dispatch, "Deleting your account");
-
-      const response = await routeInstance({
-        method: "DELETE",
-        url: "/api/users/" + userId,
-        data: {
-          password: currentPassword,
-        },
-      });
-
-      console.log(response.data);
-
-      const _data = response.data;
-      if (_data.success === true) {
-        setProcess.setResultProcess(dispatch, true, "Account deleted");
-        dispatch(authSliceActions.logoutUser());
-      }
-    } catch (err) {
-      setProcess.setResultProcess(dispatch, false, "Invalid credentials");
-      // setToastData(dispatch);
-    }
-  };
-};
-
-export const updateUserPassword = (currentPassword, newPassword, userId) => {
-  return async (dispatch) => {
-    try {
-      setProcess.setLoadingProcess(dispatch, "Updating your account");
-
-      const response = await routeInstance({
-        method: "PUT",
-        url: "/api/users/" + userId + "/update-password",
-        data: {
-          currentPassword,
-          newPassword,
-        },
-      });
-
-      const _data = response.data;
-      console.log(_data);
-      if (_data.success === true) {
-        setProcess.setResultProcess(dispatch, true, _data.msg);
-      }
-    } catch (err) {
-      setProcess.setResultProcess(dispatch, false, "Invalid credentials");
-      // setToastData(dispatch);
     }
   };
 };

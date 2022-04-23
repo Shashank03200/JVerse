@@ -9,14 +9,14 @@ import {
   Input,
   VStack,
 } from "@chakra-ui/react";
-import { deleteUserAccount } from "../../store/auth-actions";
+import { deleteUserAccount } from "../../store/user-actions";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 const AccountDeleteForm = () => {
   const history = useHistory();
-  const userId = useSelector((state) => state.feed.userId);
+  const userId = useSelector((state) => state.user.userId);
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
 
