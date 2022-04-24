@@ -1,4 +1,5 @@
 import { Switch, Route, Redirect, useHistory } from "react-router-dom";
+import { io } from "socket.io-client";
 import { useSelector, useDispatch } from "react-redux";
 import React, { Suspense, useEffect } from "react";
 import { Spinner, useToast } from "@chakra-ui/react";
@@ -17,11 +18,8 @@ const LoginPage = React.lazy(() => import("./pages/LoginPage"));
 const RegisterPage = React.lazy(() => import("./pages/RegisterPage"));
 
 const ProfilePage = React.lazy(() => import("./pages/ProfilePage"));
-const ProfileSetup = React.lazy(() => import("./pages/ProfileSetup"));
+
 const EditProfilePage = React.lazy(() => import("./pages/EditProfilePage"));
-const SecurityInfoForm = React.lazy(() =>
-  import("./components/EditProfile/SecurityInfoForm")
-);
 
 const ProcessOverlay = React.lazy(() =>
   import("./components/VisualFeedback/ProcessOverlay")
@@ -36,6 +34,10 @@ const NewPostCreator = React.lazy(() =>
 const NavWrapper = React.lazy(() => import("./components/Appbar/NavWrapper"));
 
 const FeedPage = React.lazy(() => import("./pages/FeedPage"));
+
+const socket = io("https://server-domain.com");
+
+socket.emit("hello", "world");
 
 function App() {
   const dispatch = useDispatch();

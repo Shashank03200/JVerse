@@ -151,11 +151,20 @@ const getAllPosts = async (req, res, next) => {
 
 const likePost = async (req, res) => {
   try {
-    const post = await Post.findById(req.params.postId);
+    const post = await Post.findById(req.params.postId).lean().exec();
 
     if (post) {
       if (!post.likes.includes(req.userId)) {
         await post.updateOne({ $push: { likes: req.userId } });
+
+        const _notification = new Notification({
+          postId: req.params.postId,
+          fromUserId: req.userId,
+          toUserId: post.userId,
+        });
+
+        _notification.save();
+
         await post.save();
         res
           .status(200)

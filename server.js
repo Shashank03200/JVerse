@@ -8,6 +8,7 @@ require("./helpers/init_mongodb");
 require("./helpers/init_redis");
 
 const app = express();
+const httpServer = createServer(app);
 app.use(express.json());
 
 app.use(
@@ -20,6 +21,8 @@ app.use(
 app.use(cors());
 
 app.use(morgan("dev"));
+
+// Socket.io initialization using http server
 
 const authRouter = require("./routes/auth.route");
 const userRouter = require("./routes/users.route");
@@ -56,5 +59,5 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.listen(PORT, () => {
-  console.log("Server started on port", PORT);
+  console.log("Server started on Port ", PORT);
 });

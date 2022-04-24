@@ -2,9 +2,11 @@ import { Box, Container, Heading } from "@chakra-ui/react";
 import React from "react";
 import SuggestedUserList from "../components/Feed/RightBar/SuggestedUserList";
 
+import "./SuggestionsPage.css";
+
 const SuggestionsPage = () => {
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" className="suggestionsPage">
       <Box
         marginY={{
           base: "2.4rem",

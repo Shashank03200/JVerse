@@ -21,23 +21,24 @@ const updateUser = async (req, res, next) => {
       //     invalidate: true,
       //   });
       // }
-      const base64ImageContent = dataUri(req);
-      result = await cloudinary.uploader.upload(base64ImageContent, {
-        folder: `social/profiles/${userId}`,
-      });
     }
+    const base64ImageContent = dataUri(req);
+    result = await cloudinary.uploader.upload(base64ImageContent, {
+      folder: `social/profiles/${userId}`,
+    });
 
-    await User.updateOne(
+    const updatedUserDetails = await User.findOneAndUpdate(
       { _id: userId },
       {
         profileImage: result ? result.url : foundUser.profileImage,
         public_id: result ? result.public_id : foundUser.public_id,
         name: req.body.name ? req.body.name : foundUser.name,
         bio: req.body.bio ? req.body.bio : foundUser.bio,
-      }
+      },
+      { new: true }
     );
 
-    const updatedUserDetails = await User.findById(userId);
+    // const updatedUserDetails = await User.findById(userId);
     res.status(200).json({
       success: true,
       msg: "Account updated",

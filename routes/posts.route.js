@@ -13,8 +13,8 @@ router.get("/timeline", verifyAccessToken, postController.getTimelinePosts);
 
 router.post(
   "/newpost",
-  upload.single("postImage"),
   verifyAccessToken,
+  upload.single("postImage"),
   postController.createNewPost
 );
 
