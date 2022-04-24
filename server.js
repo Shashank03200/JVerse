@@ -8,7 +8,6 @@ require("./helpers/init_mongodb");
 require("./helpers/init_redis");
 
 const app = express();
-const httpServer = createServer(app);
 app.use(express.json());
 
 app.use(
