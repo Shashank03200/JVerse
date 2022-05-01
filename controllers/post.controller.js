@@ -149,21 +149,23 @@ const getAllPosts = async (req, res, next) => {
   }
 };
 
-const likePost = async (req, res) => {
+const likePost = async (req, res, next) => {
   try {
-    const post = await Post.findById(req.params.postId).lean().exec();
+    const post = await Post.findById(req.params.postId);
+
+    console.log(post);
 
     if (post) {
       if (!post.likes.includes(req.userId)) {
         await post.updateOne({ $push: { likes: req.userId } });
 
-        const _notification = new Notification({
-          postId: req.params.postId,
-          fromUserId: req.userId,
-          toUserId: post.userId,
-        });
+        // const _notification = new Notification({
+        //   postId: req.params.postId,
+        //   fromUserId: req.userId,
+        //   toUserId: post.userId,
+        // });
 
-        _notification.save();
+        // _notification.save();
 
         await post.save();
         res
@@ -179,7 +181,7 @@ const likePost = async (req, res) => {
       }
     }
   } catch (err) {
-    res.status(500).json(err);
+    next(err);
   }
 };
 

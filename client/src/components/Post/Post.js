@@ -51,8 +51,8 @@ const Post = ({ postData }) => {
 
   const postLikeActivityHandler = () => {
     async function likeDislikePost() {
-      await likeDislikePostHandler(dispatch, postId);
-      await setIsLiked((prevState) => !prevState);
+      dispatch(likeDislikePostHandler(postId));
+      setIsLiked((prevState) => !prevState);
 
       if (isLiked) {
         setLikesCount((prevCount) => (prevCount -= 1));

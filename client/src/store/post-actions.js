@@ -43,7 +43,7 @@ export const checkLikeStatus = async (postId) => {
   }
 };
 
-export const likeDislikePostHandler = async (dispatch, postId) => {
+export const likeDislikePostHandler = (postId) => async (dispatch) => {
   try {
     const response = await routeInstance({
       url: `/api/posts/${postId}/like`,
@@ -53,7 +53,7 @@ export const likeDislikePostHandler = async (dispatch, postId) => {
 
     console.log(response);
     const data = await response.data;
-    dispatch();
+
     console.log(data);
   } catch (error) {
     console.log(error);
