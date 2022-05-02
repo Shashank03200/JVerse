@@ -9,6 +9,12 @@ require("./helpers/init_redis");
 
 const app = express();
 app.use(express.json());
+var corsOptions = {
+  origin: "*",
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 app.use(
   "/public",
@@ -16,8 +22,6 @@ app.use(
     path.join(__dirname, "client", "public", "assets", "uploads", "posts")
   )
 );
-
-app.use(cors());
 
 app.use(morgan("dev"));
 
