@@ -1,5 +1,5 @@
 import { Switch, Route, Redirect, useHistory } from "react-router-dom";
-import { io } from "socket.io-client";
+
 import { useSelector, useDispatch } from "react-redux";
 import React, { Suspense, useEffect } from "react";
 import { Spinner, useToast } from "@chakra-ui/react";
@@ -34,10 +34,6 @@ const NewPostCreator = React.lazy(() =>
 const NavWrapper = React.lazy(() => import("./components/Appbar/NavWrapper"));
 
 const FeedPage = React.lazy(() => import("./pages/FeedPage"));
-
-const socket = io("https://server-domain.com");
-
-socket.emit("hello", "world");
 
 function App() {
   const dispatch = useDispatch();
