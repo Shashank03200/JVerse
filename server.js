@@ -8,14 +8,12 @@ require("./helpers/init_mongodb");
 require("./helpers/init_redis");
 
 const app = express();
-const corsOpts = {
-  origin: "*",
-
-  methods: ["GET", "POST"],
-
-  allowedHeaders: ["Content-Type"],
-};
-
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
+  })
+);
 app.use(cors(corsOpts));
 
 app.use(
