@@ -34,9 +34,9 @@ app.use("/api/posts", postRouter);
 app.use("/api/users", userRouter);
 app.use("/api/comments", commentRouter);
 
-app.get("/", (req, res) => {
-  res.json({ status: "ok" });
-});
+// app.get("/", (req, res) => {
+//   res.json({ status: "ok" });
+// });
 // Error Response Middleware
 app.use((err, req, res, next) => {
   const status = err.status || 500;
