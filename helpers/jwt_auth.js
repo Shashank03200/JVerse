@@ -9,7 +9,7 @@ module.exports = {
       const payload = {};
       const secret = process.env.ACCESS_TOKEN_SECRET;
       const options = {
-        expiresIn: "5s",
+        expiresIn: "1y",
         issuer: "instagram.com",
         audience: userId,
       };
