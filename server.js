@@ -8,6 +8,8 @@ require("./helpers/init_mongodb");
 require("./helpers/init_redis");
 
 const app = express();
+app.use(cors());
+app.use(express.json());
 
 app.use(
   "/public",
@@ -17,25 +19,8 @@ app.use(
 );
 
 app.use(morgan("dev"));
-app.use(cors());
+
 // Socket.io initialization using http server
-
-// app.use(
-//   cors({
-//     origin: "*",
-//     methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
-//   })
-// );
-
-// app.use(cors(corsOpts));
-
-// app.use(function (req, res, next) {
-//   res.setHeader("Access-Control-Allow-Origin", "*");
-//   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-//   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-//   res.setHeader("Access-Control-Allow-Credentials", true);
-//   next();
-// });
 
 const authRouter = require("./routes/auth.route");
 const userRouter = require("./routes/users.route");
@@ -49,6 +34,9 @@ app.use("/api/posts", postRouter);
 app.use("/api/users", userRouter);
 app.use("/api/comments", commentRouter);
 
+app.get("/", (req, res) => {
+  res.json({ status: "ok" });
+});
 // Error Response Middleware
 app.use((err, req, res, next) => {
   const status = err.status || 500;
