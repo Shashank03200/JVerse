@@ -11,16 +11,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use(
-  "/public",
-  express.static(
-    path.join(__dirname, "client", "public", "assets", "uploads", "posts")
-  )
-);
-
 app.use(morgan("dev"));
-
-// Socket.io initialization using http server
 
 const authRouter = require("./routes/auth.route");
 const userRouter = require("./routes/users.route");
@@ -34,9 +25,6 @@ app.use("/api/posts", postRouter);
 app.use("/api/users", userRouter);
 app.use("/api/comments", commentRouter);
 
-// app.get("/", (req, res) => {
-//   res.json({ status: "ok" });
-// });
 // Error Response Middleware
 app.use((err, req, res, next) => {
   const status = err.status || 500;

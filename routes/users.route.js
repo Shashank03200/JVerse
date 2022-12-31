@@ -28,4 +28,6 @@ router.get(
   userController.getSuggestedUsers
 );
 
+router.get("/check-username", userController.checkUsernameExists)
+
 module.exports = router;

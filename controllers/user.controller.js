@@ -50,6 +50,31 @@ const updateUser = async (req, res, next) => {
   }
 };
 
+const checkUsernameExists = async(req, res, next) => {
+  try{
+    
+    const {queryString} = req.query;
+
+    const _foundUser = await User.find({username: queryString});
+    console.log(queryString);
+  if(_foundUser.length > 0){
+    return res.status(200).json({
+      success:true,
+      userExists: true
+    })
+  }else{
+    return res.status(200).json({
+      success:true,
+      userExists: false
+    })
+  }
+
+
+  }catch(err){
+    next(err)
+  }
+}
+
 const deleteUser = async (req, res, next) => {
   try {
     if (req.userId == req.params.id || req.body.isAdmin) {
@@ -230,4 +255,5 @@ module.exports = {
   unfollowUser,
   getSuggestedUsers,
   updatePassword,
+  checkUsernameExists
 };
