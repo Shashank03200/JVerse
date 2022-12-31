@@ -2,6 +2,7 @@ require("dotenv").config();
 const path = require("path");
 const express = require("express");
 const cors = require("cors");
+const connectDB = require("./helpers/init_mongodb");
 
 var morgan = require("morgan");
 require("./helpers/init_mongodb");
@@ -46,7 +47,11 @@ app.get("*", (req, res) => {
   );
 });
 // }
-
-app.listen(PORT, () => {
-  console.log("Server started on Port ", PORT);
-});
+connectDB
+  .then(() => {
+    console.log("MongoDB connected");
+    app.listen(PORT, () => {
+      console.log("Server started on Port ", PORT);
+    });
+  })
+  .catch((err) => console.log(err));
