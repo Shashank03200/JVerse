@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Input, Button } from "@chakra-ui/react";
+import { Input, Button, Box } from "@chakra-ui/react";
 
 import AuthImage from "../assets/authentication-logo.png";
 import JVerseLogo from "../assets/jverse logo.png";
@@ -9,6 +9,8 @@ import { signUser } from "../store/auth-actions";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+import { useRef } from "react";
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
@@ -16,6 +18,7 @@ const RegisterPage = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [usernameExists, setUsernameExists] = useState(null);
 
   const authBtnLoading = useSelector((state) => state.auth.authBtnLoading);
 
@@ -37,6 +40,28 @@ const RegisterPage = () => {
       history.push("/edit-profile");
     } catch (err) {}
   };
+
+  let timer = useRef() ;
+
+  const checkExistingUser = (event)=>{
+  
+    clearTimeout(timer.current);
+    console.log(username)
+    timer.current = setTimeout(()=>{
+        axios({
+          method:'GET',
+          url:process.env.REACT_APP_API_URL + "/api/users/check-username?queryString="+username,
+          
+        }).then((res)=>{
+          const data = res.data;
+          if(data.userExists===true){
+            setUsernameExists(true);
+          }else{
+            setUsernameExists(false);
+          }
+        })
+    }, 500)
+  }
 
   return (
     <div className="Auth__Wrapper">
@@ -75,6 +100,7 @@ const RegisterPage = () => {
               disabled={authBtnLoading}
               placeholder="Enter email"
               size="md"
+              value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
@@ -91,8 +117,10 @@ const RegisterPage = () => {
               onChange={(e) => {
                 setUsername(e.target.value);
               }}
+              value={username}
+              onKeyUp={checkExistingUser}
             />
-
+            {usernameExists === true && <Box sx={{color: 'red', fontSize:'12px',letterSpacing:1, marginTop:'-10px'}}>Username Already Exists</Box>}
             <Input
               marginY="14px"
               name="password"
@@ -101,6 +129,7 @@ const RegisterPage = () => {
               disabled={authBtnLoading}
               placeholder="Enter password"
               size="md"
+              value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
               }}

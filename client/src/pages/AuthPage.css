@@ -2,7 +2,7 @@
   display: flex;
   align-items: center !important;
   height: 100vh;
-  
+
 }
 
 
@@ -46,10 +46,11 @@
   padding: 1.2rem;
   background-color: #6c63ff !important;
   font-size: 18px !important;
+  cursor: pointer;
 }
 
 .Auth__FormWrapper__DescContainer {
-  text-align: center ;
+  text-align: center;
   font-size: 16px;
 }
 
@@ -62,7 +63,7 @@
   .Auth__FormWrapper {
     display: flex;
     flex-direction: column;
-   
+
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
     align-items: center;
     padding: 1rem;
@@ -74,8 +75,8 @@
     background-image: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
   }
 
- 
-  .Auth__FormWrapper__Form{
+
+  .Auth__FormWrapper__Form {
     width: 85%;
   }
 }
