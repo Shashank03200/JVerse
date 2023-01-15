@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/components/VisualFeedback/ProcessOverlay.css"],"names":[],"mappings":"AAAA,wBACE,UAAW,CACX,WAAY,CACZ,WAAY,CACZ,+BACF","file":"12.76d03387.chunk.css","sourcesContent":[".processOverlayBackdrop {\r\n  width: 100%;\r\n  height: 100%;\r\n  z-index: 100;\r\n  background-color: rgba(0, 0, 0, 0.4);\r\n}\r\n"]}
