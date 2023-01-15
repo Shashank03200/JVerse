@@ -35,8 +35,6 @@ app.use((err, req, res, next) => {
   });
 });
 
-console.log(path.resolve(__dirname, "client", "build", "public", "index.html"));
-
 // Code to be used in production / deployment
 // Server static assets if in production
 // if (process.env.NODE_ENV === "production") {
@@ -44,9 +42,7 @@ console.log(path.resolve(__dirname, "client", "build", "public", "index.html"));
 app.use(express.static(path.join(__dirname, "client", "build")));
 
 app.get("*", (req, res) => {
-  res.sendFile(
-    path.resolve(__dirname, "client", "build", "public", "index.html")
-  );
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 // }
 connectDB
