@@ -42,9 +42,7 @@ app.use((err, req, res, next) => {
 app.use(express.static(path.join(__dirname, "client", "build")));
 
 app.get("*", (req, res) => {
-  res.sendFile(
-    path.resolve(__dirname, "client", "build", "public", "index.html")
-  );
+  res.sendFile(path.resolve("client", "build", "public", "index.html"));
 });
 // }
 connectDB
