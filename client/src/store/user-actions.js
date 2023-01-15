@@ -101,7 +101,7 @@ export const loadUserDataUsingToken = () => {
   return async (dispatch) => {
     try {
       const response = await routeInstance({
-        method: "get",
+        method: "GET",
         url: "/api/auth/user",
         headers: {
           "Content-Type": "application/json",

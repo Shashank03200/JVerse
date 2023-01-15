@@ -41,27 +41,28 @@ const RegisterPage = () => {
     } catch (err) {}
   };
 
-  let timer = useRef() ;
+  let timer = useRef();
 
-  const checkExistingUser = (event)=>{
-  
+  const checkExistingUser = (event) => {
     clearTimeout(timer.current);
-    console.log(username)
-    timer.current = setTimeout(()=>{
-        axios({
-          method:'GET',
-          url:process.env.REACT_APP_API_URL + "/api/users/check-username?queryString="+username,
-          
-        }).then((res)=>{
-          const data = res.data;
-          if(data.userExists===true){
-            setUsernameExists(true);
-          }else{
-            setUsernameExists(false);
-          }
-        })
-    }, 500)
-  }
+    console.log(username);
+    timer.current = setTimeout(() => {
+      axios({
+        method: "GET",
+        url:
+          process.env.REACT_APP_API_URL +
+          "/api/users/check-username?queryString=" +
+          username,
+      }).then((res) => {
+        const data = res.data;
+        if (data.userExists === true) {
+          setUsernameExists(true);
+        } else {
+          setUsernameExists(false);
+        }
+      });
+    }, 500);
+  };
 
   return (
     <div className="Auth__Wrapper">
@@ -120,7 +121,20 @@ const RegisterPage = () => {
               value={username}
               onKeyUp={checkExistingUser}
             />
-            {usernameExists === true && <Box sx={{color: 'red', fontSize:'12px',letterSpacing:1, marginTop:'-10px'}}>Username Already Exists</Box>}
+            {usernameExists === true && (
+              <Input
+                size="md"
+                sx={{
+                  color: "red",
+                  w: "100%",
+                  fontSize: "12px",
+                  letterSpacing: 1,
+                  marginTop: "-10px",
+                }}
+                value={"Username Already Exists"}
+                isDisabled={true}
+              />
+            )}
             <Input
               marginY="14px"
               name="password"

@@ -26,6 +26,7 @@ const RightBar = () => {
       paddingLeft="5vw"
       className="RightBarWrapper"
       bgColor="feedBackground.200"
+      overflow="none"
     >
       <UserDetailsCard userData={userData} />
       <Box

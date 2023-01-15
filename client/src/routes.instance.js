@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const routeInstance = axios.create();
+const routeInstance = axios.create({
+  baseURL: process.env.REACT_APP_API_URL,
+});
 
 routeInstance.interceptors.request.use(
   (request) => {
