@@ -4,6 +4,7 @@ const Post = require("../models/Post");
 const cloudinary = require("cloudinary").v2;
 const { dataUri } = require("../helpers/file_upload");
 const bcrypt = require("bcrypt");
+const socketIO = global.socketIO;
 
 const updateUser = async (req, res, next) => {
   try {
@@ -14,13 +15,6 @@ const updateUser = async (req, res, next) => {
 
     if (req.file) {
       const profilePublicId = foundUser.public_id;
-      // if (profilePublicId !== "") {
-      //   await cloudinary.uploader.destroy(profilePublicId, {
-      //     resource_type: "image",
-      //     type: "upload",
-      //     invalidate: true,
-      //   });
-      // }
     }
     const base64ImageContent = dataUri(req);
     result = await cloudinary.uploader.upload(base64ImageContent, {
@@ -50,30 +44,27 @@ const updateUser = async (req, res, next) => {
   }
 };
 
-const checkUsernameExists = async(req, res, next) => {
-  try{
-    
-    const {queryString} = req.query;
+const checkUsernameExists = async (req, res, next) => {
+  try {
+    const { queryString } = req.query;
 
-    const _foundUser = await User.find({username: queryString});
+    const _foundUser = await User.find({ username: queryString });
     console.log(queryString);
-  if(_foundUser.length > 0){
-    return res.status(200).json({
-      success:true,
-      userExists: true
-    })
-  }else{
-    return res.status(200).json({
-      success:true,
-      userExists: false
-    })
+    if (_foundUser.length > 0) {
+      return res.status(200).json({
+        success: true,
+        userExists: true,
+      });
+    } else {
+      return res.status(200).json({
+        success: true,
+        userExists: false,
+      });
+    }
+  } catch (err) {
+    next(err);
   }
-
-
-  }catch(err){
-    next(err)
-  }
-}
+};
 
 const deleteUser = async (req, res, next) => {
   try {
@@ -255,5 +246,5 @@ module.exports = {
   unfollowUser,
   getSuggestedUsers,
   updatePassword,
-  checkUsernameExists
+  checkUsernameExists,
 };

@@ -2,6 +2,8 @@ require("dotenv").config();
 const path = require("path");
 const express = require("express");
 const cors = require("cors");
+// const socket = require("socket.io");
+
 const connectDB = require("./helpers/init_mongodb");
 
 var morgan = require("morgan");
@@ -9,10 +11,31 @@ require("./helpers/init_mongodb");
 require("./helpers/init_redis");
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
+const http = require("http").Server(app);
 
-app.use(morgan("dev"));
+const socketIO = require("socket.io")(http, {
+  cors: {
+    origin: "http://localhost:3000",
+  },
+});
+
+socketIO.on("connection", (socket) => {
+  console.log(`⚡: ${socket.id} user just connected!`);
+
+  //Listens and logs the message to the console
+  socket.on("message", (data) => {
+    console.log(data);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("🔥: A user disconnected");
+  });
+});
+
+// app.use(morgan("dev"));
 
 const authRouter = require("./routes/auth.route");
 const userRouter = require("./routes/users.route");

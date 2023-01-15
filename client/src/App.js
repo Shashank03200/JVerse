@@ -1,7 +1,7 @@
 import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
-import React, { Suspense, useEffect } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Spinner, useToast } from "@chakra-ui/react";
 
 import checkSession from "./utils/checkSession";
@@ -14,6 +14,10 @@ import { authSliceActions } from "./store/authSlice";
 
 import LoadOverlay from "./components/VisualFeedback/LoadOverlay";
 import SuggestionsPage from "./pages/SuggestionsPage";
+
+// import SocketContext from "./utils/socket";
+import socketIO from "socket.io-client";
+
 const LoginPage = React.lazy(() => import("./pages/LoginPage"));
 const RegisterPage = React.lazy(() => import("./pages/RegisterPage"));
 
@@ -35,7 +39,11 @@ const NavWrapper = React.lazy(() => import("./components/Appbar/NavWrapper"));
 
 const FeedPage = React.lazy(() => import("./pages/FeedPage"));
 
+const socket = socketIO.connect("http://localhost:5000");
+
 function App() {
+  const [isConnected, setIsConnected] = useState(false);
+
   const dispatch = useDispatch();
   const toast = useToast();
   const history = useHistory();
@@ -47,6 +55,26 @@ function App() {
     (state) => state.UISlice.isLogoutAlertVisible
   );
   const { isActive } = toastData;
+
+  // const socket = React.useContext(SocketContext);
+
+  // useEffect(() => {
+  //   socket.emit("connection", "Connected");
+
+  //   socket.on("connect", () => {
+  //     setIsConnected(true);
+  //   });
+
+  //   socket.on("disconnect", () => {
+  //     setIsConnected(false);
+  //   });
+
+  //   return () => {
+  //     socket.off("connect");
+  //     socket.off("disconnect");
+  //     socket.off("pong");
+  //   };
+  // }, []);
 
   useEffect(() => {
     if (!isLoggedIn) {
