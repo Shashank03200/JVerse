@@ -1,4 +1,4 @@
-import routeInstance from "../routes.instance";
+import routeInstance from "../api/routes.instance";
 import setToastData from "../utils/showToast";
 import { feedSliceActions } from "./feedSlice";
 

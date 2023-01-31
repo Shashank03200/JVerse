@@ -18,10 +18,10 @@ const RightBar = () => {
   return (
     <Box
       flex="5"
-      height="94vh"
+      height="calc(100vh - 40px)"
       position="sticky"
-      top="50px"
-      d={{ base: "none", lg: "flex" }}
+      top="48px"
+      display={{ base: "none", lg: "flex" }}
       flexDirection="column"
       paddingLeft="5vw"
       className="RightBarWrapper"

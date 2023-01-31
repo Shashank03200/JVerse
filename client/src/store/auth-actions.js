@@ -4,7 +4,7 @@ import setToastData from "../utils/showToast";
 import axios from "axios";
 import { getTokens, setToken } from "../utils/handleTokens";
 import checkSession from "../utils/checkSession";
-import routeInstance from "../routes.instance";
+import routeInstance from "../api/routes.instance";
 import setProcess from "../utils/setProcess";
 
 import { userSliceActions } from "./userSlice";

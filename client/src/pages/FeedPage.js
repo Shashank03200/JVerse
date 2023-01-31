@@ -8,7 +8,7 @@ import RightBar from "../components/Feed/RightBar/RightBar";
 const FeedPage = () => {
   console.log("feed page rerendered");
   return (
-    <Box d="flex">
+    <Box d="flex" pos="relative">
       <Sidebar />
       <Feed />
       <RightBar />

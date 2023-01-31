@@ -15,7 +15,7 @@ import PostImage from "./PostImage";
 import { getLatestComments } from "../../store/comment-actions";
 import PostBox from "./PostBox";
 
-const Post = ({ postData }) => {
+const Post = ({ postData }, ref) => {
   const dispatch = useDispatch();
 
   const [isPostDataLoading, setIsPostDataLoading] = useState(true);
@@ -28,7 +28,7 @@ const Post = ({ postData }) => {
 
   const { _id: postId, postDeletePossible } = postData;
   const { username, profileImage: userProfileSrc } = postData.userId;
-  console.log(userProfileSrc);
+
   useEffect(() => {
     if (isLiked === undefined) {
       let likedConst = postData.likes.includes(userId);
@@ -87,9 +87,9 @@ const Post = ({ postData }) => {
     setLatestComments(latestCommentsTemp);
   };
 
-  const PostContent = () => {
+  const PostContent = React.forwardRef(() => {
     return (
-      <>
+      <div ref={ref}>
         <Box>
           <PostHeader
             username={username}
@@ -141,15 +141,15 @@ const Post = ({ postData }) => {
         <Box marginY="8px" fontSize="13px" mx="10px">
           {likesCount > 0 ? `${likesCount} likes` : "No likes"}
         </Box>
-      </>
+      </div>
     );
-  };
+  });
 
   return (
     <PostBox className="postDataContainer">
-      {isPostDataLoading ? <PostSkeleton /> : <PostContent />}
+      {isPostDataLoading ? <PostSkeleton /> : <PostContent ref={ref} />}
     </PostBox>
   );
 };
 
-export default React.memo(Post);
+export default React.forwardRef(Post);

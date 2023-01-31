@@ -1,7 +1,7 @@
 import { React, useEffect, useState } from "react";
 
 import { Box, Center, Spinner } from "@chakra-ui/react";
-import routeInstance from "../../routes.instance";
+import routeInstance from "../../api/routes.instance";
 import Comment from "./Comment";
 
 function Comments(props) {

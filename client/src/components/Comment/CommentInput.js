@@ -3,7 +3,7 @@ import { Box, Avatar, Input, Button } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import routeInstance from "../../routes.instance";
+import routeInstance from "../../api/routes.instance";
 
 function CommentInput(props) {
   const userProfileImage = useSelector((state) => state.user.userProfileImage);
@@ -40,7 +40,13 @@ function CommentInput(props) {
   };
 
   return (
-    <Box width="100%" py="12px" mx="2px" d="flex" borderTop="1px solid #ccc">
+    <Box
+      width="100%"
+      py="12px"
+      mx="2px"
+      display="flex"
+      borderTop="1px solid #ccc"
+    >
       <Box p="5px" display="flex" alignItems="center">
         <Avatar size="xs" name={userFullname} src={userProfileImage} mr="4px" />
       </Box>
@@ -52,14 +58,12 @@ function CommentInput(props) {
           sm: "10px",
           md: "12px",
         }}
-        width="auto"
         flexShrink="1"
-        d="flex"
         justifyContent="center"
         alignContent="center"
         display={{ base: "none", lg: "flex" }}
         overflow="hidden"
-        maxWidth="100px"
+        maxWidth="140px"
       >
         {username}
       </Box>

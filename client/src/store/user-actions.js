@@ -1,4 +1,4 @@
-import routeInstance from "../routes.instance";
+import routeInstance from "../api/routes.instance";
 import setProcess from "../utils/setProcess";
 import setToastData from "../utils/showToast";
 import { authSliceActions } from "./authSlice";

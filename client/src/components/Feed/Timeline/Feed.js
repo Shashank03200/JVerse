@@ -1,41 +1,46 @@
 import Post from "../../Post/Post";
-import { loadTimelinePosts } from "../../../store/feed-actions";
-import InfiniteScroll from "react-infinite-scroll-component";
+
 import { useCallback, useEffect, useState } from "react";
 import { Box, Text } from "@chakra-ui/layout";
 
 import { Spinner } from "@chakra-ui/spinner";
 
 import PostSkeleton from "../../Post/PostSkeleton";
-import { useDispatch, useSelector } from "react-redux";
-import { feedSliceActions } from "../../../store/feedSlice";
+
 import NoPostsFound from "../../Profile/NoPostsFound";
+import { useRef } from "react";
+import setToastData from "../../../utils/showToast";
+import routeInstance from "../../../api/routes.instance";
+import useFetchPosts from "../../../hooks/useFetchPosts";
+import { interactivity } from "@chakra-ui/react";
 
 const Feed = () => {
-  const dispatch = useDispatch();
-  const { timelinePosts, morePosts, page } = useSelector((state) => state.feed);
+  const [pageNum, setPageNum] = useState(1);
 
-  const [loading, setLoading] = useState(false);
+  const { isLoading, isError, results, error, hasNextPage } =
+    useFetchPosts(pageNum);
 
-  useEffect(() => {
-    async function loadPosts() {
-      await setLoading(true);
-      console.log("loadingPosts");
-      await dispatch(loadTimelinePosts(page));
-      setLoading(false);
-    }
+  const intObserver = useRef();
+  const lastPostRef = useCallback(
+    (post) => {
+      if (isLoading) return;
+      if (intObserver.current) intObserver.current.disconnect();
 
-    if (morePosts === true) {
-      loadPosts();
-    }
-    return () => {
-      dispatch(feedSliceActions.setMorePostsBoolean(false));
-    };
-  }, [page, dispatch, morePosts]);
+      intObserver.current = new IntersectionObserver((posts) => {
+        if (posts[0].isIntersecting && hasNextPage) {
+          console.log("We are near the last post !");
+          setPageNum((prev) => prev + 1);
+        }
+      });
 
-  const pageIncreaseHandler = useCallback(() => {
-    dispatch(feedSliceActions.incrementPage());
-  }, [dispatch]);
+      if (post) {
+        intObserver.current.observe(post);
+      }
+    },
+    [isLoading, hasNextPage]
+  );
+
+  console.log(results[0]);
 
   return (
     <Box
@@ -44,31 +49,16 @@ const Feed = () => {
       bgColor="feedBackground.200"
       minHeight="90vh"
     >
-      <InfiniteScroll
-        dataLength={timelinePosts.length}
-        next={pageIncreaseHandler}
-        hasMore={morePosts}
-        loader={<PostSkeleton />}
-        endMessage={
-          timelinePosts.length > 0 ? (
-            <Box
-              padding="12px"
-              style={{ textAlign: "center" }}
-              backgroundColor="navBackground.200"
-            >
-              <Text fontSize="lg">You are all caught up</Text>
-            </Box>
-          ) : (
-            <NoPostsFound />
-          )
+      {results.map((post, index) => {
+        const isLastPost = index === results.length - 1;
+        if (isLastPost) {
+          return (
+            <Post key={index + post._id} postData={post} ref={lastPostRef} />
+          );
         }
-      >
-        {timelinePosts.map((post, index) => (
-          <Post key={index + post._id} postData={post} />
-        ))}
-      </InfiniteScroll>
-
-      {loading && (
+        return <Post key={index + post._id} postData={post} />;
+      })}
+      {hasNextPage && isLoading && (
         <Box display="flex" justifyContent="center">
           <Spinner
             thickness="2px"
@@ -77,6 +67,16 @@ const Feed = () => {
             color="blue.500"
             size="xl"
           />
+        </Box>
+      )}
+
+      {!hasNextPage && (
+        <Box
+          padding="12px"
+          style={{ textAlign: "center" }}
+          backgroundColor="navBackground.200"
+        >
+          <Text fontSize="lg">You are all caught up</Text>
         </Box>
       )}
     </Box>
