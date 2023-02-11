@@ -19,9 +19,7 @@ const userRouter = require("./routes/users.route");
 const postRouter = require("./routes/posts.route");
 const commentRouter = require("./routes/comment.route");
 
-const PORT = process.env.PORT || 5000;
-
-
+const PORT = process.env.port || 4200;
 
 app.use("/api/auth", authRouter);
 app.use("/api/posts", postRouter);

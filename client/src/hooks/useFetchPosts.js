@@ -1,4 +1,3 @@
-import { func } from "joi";
 import React, { useState, useEffect } from "react";
 import routeInstance from "../api/routes.instance";
 
