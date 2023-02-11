@@ -9,9 +9,7 @@ require("./helpers/init_mongodb");
 require("./helpers/init_redis");
 
 const app = express();
-app.use(cors({
-    credentials:true,            //access-control-allow-credentials:true
-}));
+app.use(cors());
 app.use(express.json());
 
 app.use(morgan("dev"));
@@ -22,6 +20,12 @@ const postRouter = require("./routes/posts.route");
 const commentRouter = require("./routes/comment.route");
 
 const PORT = process.env.PORT || 5000;
+
+app.all('*', function(req, res, next) {
+   res.header("Access-Control-Allow-Origin", "*");
+   res.header("Access-Control-Allow-Headers", "X-Requested-With");
+   next();
+});
 
 app.use("/api/auth", authRouter);
 app.use("/api/posts", postRouter);
