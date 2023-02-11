@@ -19,7 +19,7 @@ const LoginPage = () => {
     e.preventDefault();
     const requestObject = {
       method: "POST",
-      url: process.env.REACT_APP_API_URL + "/api/auth/login",
+      url: "/api/auth/login",
       data: { email, password },
     };
     dispatch(signUser(requestObject));

@@ -33,7 +33,7 @@ const RegisterPage = () => {
     try {
       const requestObject = {
         method: "POST",
-        url: process.env.REACT_APP_API_URL + "/api/auth/register",
+        url: "/api/auth/register",
         data: registerData,
       };
       dispatch(signUser(requestObject));
@@ -49,10 +49,7 @@ const RegisterPage = () => {
     timer.current = setTimeout(() => {
       axios({
         method: "GET",
-        url:
-          process.env.REACT_APP_API_URL +
-          "/api/users/check-username?queryString=" +
-          username,
+        url: "/api/users/check-username?queryString=" + username,
       }).then((res) => {
         const data = res.data;
         if (data.userExists === true) {
