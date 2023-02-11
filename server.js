@@ -10,9 +10,7 @@ require("./helpers/init_redis");
 
 const app = express();
 app.use(cors({
-    origin : 'https://jverse.cyclic.app',
     credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200
 }));
 app.use(express.json());
 
