@@ -21,11 +21,7 @@ const commentRouter = require("./routes/comment.route");
 
 const PORT = process.env.PORT || 5000;
 
-app.all('*', function(req, res, next) {
-   res.header("Access-Control-Allow-Origin", "*");
-   res.header("Access-Control-Allow-Headers", "X-Requested-With");
-   next();
-});
+
 
 app.use("/api/auth", authRouter);
 app.use("/api/posts", postRouter);
